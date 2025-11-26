@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primo Compleanno di Manvik</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Comic Neue', cursive, Arial, sans-serif;
+            font-family: 'Nunito', sans-serif;
         }
         
         body {
@@ -61,35 +62,107 @@
         }
         
         .invitation-card {
-            background-color: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fdff 100%);
             border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(30, 144, 255, 0.2);
             width: 100%;
             max-width: 500px;
             overflow: hidden;
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px 30px;
             position: relative;
-            backdrop-filter: blur(5px);
-            border: 5px solid #87CEEB;
+            border: 8px solid transparent;
+            background-clip: padding-box;
+            margin-top: 20px;
+        }
+        
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(135deg, #87CEEB, #1E90FF, #4169E1);
+            border-radius: 28px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
         
         .header {
             margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
         }
         
         h1 {
             color: #1E90FF;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 2px 2px 0px rgba(135, 206, 235, 0.2);
+            line-height: 1.2;
+            padding: 0 10px;
+        }
+        
+        .age-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 800;
             font-size: 28px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 0px rgba(135, 206, 235, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
+            animation: pulse 2s infinite;
+            border: 4px solid white;
+            z-index: 3;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .welcome-message {
+            background: linear-gradient(135deg, #E6F7FF, #B3E0FF);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 3px solid #87CEEB;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(135, 206, 235, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .welcome-message p {
+            color: #1E90FF;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin: 0;
         }
         
         .birthday-boy {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
         }
         
         .profile-container {
@@ -98,59 +171,75 @@
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid #1E90FF;
-            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4);
-            transition: transform 0.5s ease;
+            border: 8px solid #1E90FF;
+            box-shadow: 0 12px 30px rgba(30, 144, 255, 0.4);
+            transition: all 0.5s ease;
         }
         
         .profile-img:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(30, 144, 255, 0.6);
         }
         
         .birthday-hat {
             position: absolute;
-            top: -40px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 70px;
-            background-color: #FF6B6B;
+            width: 100px;
+            height: 85px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             z-index: 10;
+            animation: hatWobble 2s ease-in-out infinite;
+        }
+        
+        @keyframes hatWobble {
+            0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
         }
         
         .birthday-hat::before {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 20px;
-            background-color: #1E90FF;
-            border-radius: 10px;
+            width: 120px;
+            height: 25px;
+            background: linear-gradient(135deg, #1E90FF, #4169E1);
+            border-radius: 12px;
         }
         
         .birthday-hat::after {
             content: '';
             position: absolute;
-            top: 10px;
-            right: -10px;
-            width: 30px;
-            height: 30px;
-            background-color: white;
+            top: 15px;
+            right: -15px;
+            width: 35px;
+            height: 35px;
+            background: white;
             border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
         
         .icon-section {
             display: flex;
             justify-content: space-around;
-            margin: 30px 0;
+            margin: 35px 0;
             flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .icon {
@@ -158,32 +247,50 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            margin: 10px;
+            transition: all 0.3s ease;
+            margin: 5px;
             flex: 1;
-            min-width: 80px;
+            min-width: 85px;
         }
         
         .icon:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
         
         .icon-circle {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
-            font-size: 24px;
+            margin-bottom: 12px;
+            font-size: 28px;
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .icon:hover .icon-circle::before {
+            left: 100%;
         }
         
         .icon:hover .icon-circle {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
         
         .details-icon {
@@ -199,167 +306,183 @@
         }
         
         .icon-text {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             color: #1E90FF;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
         }
         
         .content-section {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: rgba(135, 206, 235, 0.1);
-            border-radius: 15px;
+            margin: 25px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #f0f9ff, #e6f7ff);
+            border-radius: 20px;
             display: none;
-            border: 2px dashed #1E90FF;
+            border: 3px solid #87CEEB;
             text-align: left;
+            box-shadow: 0 8px 25px rgba(135, 206, 235, 0.2);
+            position: relative;
+            z-index: 1;
         }
         
         .content-section.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: slideUp 0.5s ease;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         h2 {
             color: #1E90FF;
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-weight: 800;
             text-align: center;
-            border-bottom: 2px solid #87CEEB;
-            padding-bottom: 8px;
+            border-bottom: 3px solid #87CEEB;
+            padding-bottom: 12px;
         }
         
         p {
             color: #4169E1;
             line-height: 1.6;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
         }
         
         .details-content ul {
-            margin-left: 20px;
+            margin-left: 25px;
         }
         
         .details-content li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #4169E1;
+            font-weight: 600;
+            font-size: 16px;
         }
         
         .contact-content a {
             display: inline-block;
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
+            font-weight: 700;
+            margin-top: 20px;
             transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+            font-size: 16px;
         }
         
         .contact-content a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
         }
         
         .resort-content a {
             display: inline-block;
             background: linear-gradient(135deg, #1E90FF, #4169E1);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
+            font-weight: 700;
+            margin-top: 20px;
             transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.4);
+            font-size: 16px;
         }
         
         .resort-content a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(30, 144, 255, 0.6);
         }
         
         .map-button {
             background: linear-gradient(135deg, #4169E1, #0000CD);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 18px 35px;
             border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             width: 100%;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(65, 105, 225, 0.4);
+            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.5);
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .map-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.5);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(65, 105, 225, 0.7);
         }
         
         .map-button i {
-            margin-right: 10px;
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .family-signature {
+            margin-top: 25px;
+            color: #1E90FF;
+            font-weight: 700;
             font-size: 18px;
+            text-align: center;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 1;
         }
         
-        .age-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .address-info {
+            background: #E6F7FF;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #1E90FF;
+            font-weight: 600;
         }
         
         @media (max-width: 480px) {
             .invitation-card {
-                padding: 20px;
+                padding: 35px 20px 25px;
+                margin-top: 15px;
             }
             
             h1 {
-                font-size: 24px;
-            }
-            
-            .icon-circle {
-                width: 60px;
-                height: 60px;
-                font-size: 20px;
-            }
-            
-            .profile-img {
-                width: 120px;
-                height: 120px;
+                font-size: 26px;
             }
             
             .age-badge {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                top: -12px;
+                right: 15px;
+            }
+            
+            .icon-circle {
+                width: 70px;
+                height: 70px;
+                font-size: 24px;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .welcome-message p {
+                font-size: 16px;
             }
         }
     </style>
@@ -372,6 +495,11 @@
         
         <div class="header">
             <h1>Sei invitato al primo compleanno di Manvik!</h1>
+        </div>
+        
+        <div class="welcome-message">
+            <p>🎉 Un anno speciale da celebrare insieme! 🎉<br>
+            La tua presenza sarà il regalo più bello</p>
         </div>
         
         <div class="birthday-boy">
@@ -398,84 +526,78 @@
             
             <div class="icon" onclick="showContent('resort')">
                 <div class="icon-circle resort-icon">
-                    <i class="fas fa-hotel"></i>
+                    <i class="fas fa-map-marker-alt"></i>
                 </div>
-                <span class="icon-text">Resort</span>
+                <span class="icon-text">Location</span>
             </div>
         </div>
         
         <div id="details" class="content-section details-content">
-            <h2>Dettagli dell'Evento</h2>
+            <h2>🎂 Dettagli dell'Evento</h2>
             <p>Unisciti a noi per celebrare il primo compleanno di Manvik!</p>
             <ul>
-                <li><strong>Data:</strong> Domenica, 22 Febbraio 2026</li>
-                <li><strong>Ora:</strong> Dalle 11:00 alle 18:00</li>
-                <li><strong>Luogo:</strong> Taste Of Punjab,  Via Europa, 318, 29017 Fiorenzuola d'Arda PC</li>
+                <li><strong>📅 Data:</strong> Domenica, 22 Febbraio 2026</li>
+                <li><strong>⏰ Ora:</strong> Dalle 11:00 alle 18:00</li>
+                <li><strong>📍 Luogo:</strong> Taste Of Punjab, Via Europa, 318, 29017 Fiorenzuola d'Arda PC</li>
             </ul>
-            <p>Non vediamo l'ora di condividere con voi questo giorno speciale! Vi aspettiamo con gioia!</p>
         </div>
         
         <div id="contact" class="content-section contact-content">
-            <h2>Contatta il Papà</h2>
+            <h2>📞 Contatta il Papà</h2>
             <p>Hai domande o bisogno di informazioni?</p>
             <p>Contatta direttamente il papà di Manvik su WhatsApp:</p>
-            <a href="https://wa.me/3400910273?text=Ciao!%20Volevo%20chiederti%20informazioni%20riguardo%20il%20compleanno%20di%20Manvik!" target="_blank">
-                <i class="fab fa-whatsapp"></i> Invia Messaggio
+            <a href="https://wa.me/+393400910273?text=Ciao!%20Volevo%20chiederti%20informazioni%20riguardo%20il%20compleanno%20di%20Manvik!" target="_blank">
+                <i class="fab fa-whatsapp"></i> Chiedi Informazioni
             </a>
         </div>
         
         <div id="resort" class="content-section resort-content">
-            <h2>La Location</h2>
+            <h2>🏰 La Location</h2>
             <p>La festa si terrà in una splendida location a Fiorenzuola d'Arda:</p>
             <div class="address-info">
-                <strong>Via Europa, 318</strong><br>
-                <strong>29017 Fiorenzuola d'Arda (PC)</strong>
+                <strong>🏠 Taste Of Punjab</strong><br>
+                <strong>📍 Via Europa, 318</strong><br>
+                <strong>📮 29017 Fiorenzuola d'Arda (PC)</strong>
             </div>
             <a href="https://www.google.com/maps?rlz=1C1GCEA_enIT1134IT1134&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGEAyBggCEEUYOTINCAMQABiDARixAxiABDINCAQQABiDARixAxiABDIKCAUQLhixAxiABDIHCAYQABiABDIGCAcQRRg90gEIMTIwMGowajeoAgiwAgHxBYOHDxqTla4k&um=1&ie=UTF-8&fb=1&gl=it&sa=X&geocode=KUMaZ4bP84BHMSUUcpHTJgyn&daddr=Via+Europa,+318,+29017+Fiorenzuola+d%27Arda+PC" target="_blank">
                 <i class="fas fa-external-link-alt"></i> Vedi la posizione su Maps
             </a>
-            <div class="family-message" style="margin-top: 15px;">
-                <p>Abbiamo scelto questo posto per rendere indimenticabile il primo compleanno del nostro piccolo!</p>
-            </div>
         </div>
         
         <button class="map-button" onclick="openMap()">
             <i class="fas fa-map-marker-alt"></i> Vai alla Mappa
         </button>
+        
+        <div class="family-signature">
+            Con tanto affetto,<br>La famiglia di Manvik ❤️
+        </div>
     </div>
 
     <script>
         function showContent(sectionId) {
-            // Hide all content sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Show the selected section
             document.getElementById(sectionId).classList.add('active');
         }
         
         function openMap() {
-            // Open Google Maps with the correct address
             window.open('https://www.google.com/maps?rlz=1C1GCEA_enIT1134IT1134&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGEAyBggCEEUYOTINCAMQABiDARixAxiABDINCAQQABiDARixAxiABDIKCAUQLhixAxiABDIHCAYQABiABDIGCAcQRRg90gEIMTIwMGowajeoAgiwAgHxBYOHDxqTla4k&um=1&ie=UTF-8&fb=1&gl=it&sa=X&geocode=KUMaZ4bP84BHMSUUcpHTJgyn&daddr=Via+Europa,+318,+29017+Fiorenzuola+d%27Arda+PC', '_blank');
         }
 
-        
-        // Create floating balloons
         function createBalloons() {
             const container = document.getElementById('balloonContainer');
             const colors = ['#87CEEB', '#1E90FF', '#4169E1', '#ADD8E6', '#00BFFF', '#6495ED'];
             
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
                 
-                // Random properties
-                const size = Math.random() * 60 + 30;
+                const size = Math.random() * 70 + 40;
                 const left = Math.random() * 100;
-                const delay = Math.random() * 15;
-                const duration = Math.random() * 10 + 15;
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 15 + 20;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 
                 balloon.style.width = `${size}px`;
@@ -489,12 +611,10 @@
             }
         }
         
-        // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             showContent('details');
             createBalloons();
         });
     </script>
 </body>
-
 </html>
